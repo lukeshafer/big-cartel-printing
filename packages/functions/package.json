@@ -1,0 +1,19 @@
+{
+  "name": "@big-cartel-printing/functions",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "sst bind vitest",
+    "typecheck": "tsc -noEmit"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.125",
+    "@types/node": "^20.8.9",
+    "sst": "^2.32.2",
+    "vitest": "^0.34.6"
+  },
+  "dependencies": {
+    "@aws-sdk/client-apigatewaymanagementapi": "^3.438.0",
+    "@aws-sdk/client-dynamodb": "^3.438.0"
+  }
+}
