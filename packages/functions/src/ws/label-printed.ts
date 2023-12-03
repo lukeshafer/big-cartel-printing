@@ -8,6 +8,8 @@ export const handler = WebSocketApiHandler(async (event) => {
 	if (!event.body) return { statusCode: 400, body: 'Missing body' };
 	const messageData = JSON.parse(event.body).data;
 
+  console.log('order printed!', messageData)
+
 	await dynamoDb.putItem({
 		TableName: Table.Orders.tableName,
 		Item: {

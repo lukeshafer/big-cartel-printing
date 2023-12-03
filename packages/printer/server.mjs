@@ -13,10 +13,28 @@ ws.on('open', () => {
 ws.on('message', async (rawData) => {
 	console.log('Received message: ', rawData.toString());
 	const body = JSON.parse(rawData.toString());
-	const content = labelTemplate(body.data.address);
-	const pdf = await generatePDF(content);
-	await printBuffer(pdf, "Rollo");
+	switch (body.type) {
+		case 'order-created':
+			return await handleOrderCreated(body.data);
+    default: return;
+	}
 });
+
+/** @param {any} data */
+async function handleOrderCreated(data) {
+	const content = labelTemplate(data.address);
+	const pdf = await generatePDF(content);
+	await printBuffer(pdf, 'Rollo');
+
+  console.log("Printed, sending 'label-printed' message to server")
+
+	await ws.send(JSON.stringify({
+    type: 'label-printed',
+    data: {
+      orderNumber: data.order_id
+    }
+  }));
+}
 
 ws.on('close', () => {
 	console.log('close');
