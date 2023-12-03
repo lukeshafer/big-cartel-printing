@@ -2,6 +2,10 @@
   "extends": "@tsconfig/node18/tsconfig.json",
   "compilerOptions": {
     "module": "esnext",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "verbatimModuleSyntax": true,
     "moduleResolution": "node"
   }
 }

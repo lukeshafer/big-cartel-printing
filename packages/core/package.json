@@ -7,9 +7,11 @@
     "typecheck": "tsc -noEmit"
   },
   "devDependencies": {
-    "vitest": "^0.34.6",
+    "@aws-sdk/client-apigatewaymanagementapi": "^3.438.0",
+    "@aws-sdk/client-dynamodb": "^3.438.0",
     "@types/node": "^20.8.9",
-    "sst": "^2.32.2"
+    "sst": "^2.32.2",
+    "vitest": "^0.34.6"
   },
   "dependencies": {
     "zod": "^3.22.4"

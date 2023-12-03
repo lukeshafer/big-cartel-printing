@@ -1,7 +1,10 @@
-import { StackContext, Table, WebSocketApi } from 'sst/constructs';
+import { StackContext, Table as SSTTable, WebSocketApi, use } from 'sst/constructs';
+import { Table } from './Table';
 
 export function WSApi({ stack }: StackContext) {
-	const connectionsTable = new Table(stack, 'Connections', {
+	const { ordersTable } = use(Table);
+
+	const connectionsTable = new SSTTable(stack, 'Connections', {
 		fields: {
 			id: 'string',
 		},
@@ -11,12 +14,13 @@ export function WSApi({ stack }: StackContext) {
 	const wsApi = new WebSocketApi(stack, 'WebSocketApi', {
 		defaults: {
 			function: {
-				bind: [connectionsTable],
+				bind: [connectionsTable, ordersTable],
 			},
 		},
 		routes: {
 			$connect: 'packages/functions/src/ws/connect.handler',
 			$disconnect: 'packages/functions/src/ws/disconnect.handler',
+			labelprinted: 'packages/functions/src/ws/label-printed.handler',
 		},
 	});
 

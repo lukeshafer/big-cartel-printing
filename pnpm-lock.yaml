@@ -57,6 +57,12 @@ importers:
         specifier: ^3.22.4
         version: 3.22.4
     devDependencies:
+      '@aws-sdk/client-apigatewaymanagementapi':
+        specifier: ^3.438.0
+        version: 3.438.0
+      '@aws-sdk/client-dynamodb':
+        specifier: ^3.438.0
+        version: 3.438.0
       '@types/node':
         specifier: ^20.8.9
         version: 20.8.9
@@ -351,7 +357,6 @@ packages:
       tslib: 2.6.2
     transitivePeerDependencies:
       - aws-crt
-    dev: false
 
   /@aws-sdk/client-cloudformation@3.438.0:
     resolution: {integrity: sha512-rG2ZsNG6Jqh3lY7k9DNoj3T/Jloe6H0xirRlmDveb+z8qtQZtndm+s3+2ysEtsClTEEPUNnLcfH96MGrSnufdw==}
@@ -498,7 +503,6 @@ packages:
       uuid: 8.3.2
     transitivePeerDependencies:
       - aws-crt
-    dev: false
 
   /@aws-sdk/client-ecs@3.438.0:
     resolution: {integrity: sha512-XJC/+pLnLINhwdZOr6kQCUeZuh2Mn7+/DAiNIJex0cKMh3NDaVGptcBxztfRTQs4kBiGjLSqcsam56OutO057g==}
@@ -1194,7 +1198,6 @@ packages:
     dependencies:
       mnemonist: 0.38.3
       tslib: 2.6.2
-    dev: false
 
   /@aws-sdk/middleware-bucket-endpoint@3.433.0:
     resolution: {integrity: sha512-Lk1xIu2tWTRa1zDw5hCF1RrpWQYSodUhrS/q3oKz8IAoFqEy+lNaD5jx+fycuZb5EkE4IzWysT+8wVkd0mAnOg==}
@@ -1219,7 +1222,6 @@ packages:
       '@smithy/protocol-http': 3.0.8
       '@smithy/types': 2.4.0
       tslib: 2.6.2
-    dev: false
 
   /@aws-sdk/middleware-expect-continue@3.433.0:
     resolution: {integrity: sha512-Uq2rPIsjz0CR2sulM/HyYr5WiqiefrSRLdwUZuA7opxFSfE808w5DBWSprHxbH3rbDSQR4nFiOiVYIH8Eth7nA==}
@@ -6027,7 +6029,6 @@ packages:
     resolution: {integrity: sha512-2K9QYubXx/NAjv4VLq1d1Ly8pWNC5L3BrixtdkyTegXWJIqY+zLNDhhX/A+ZwWt70tB1S8H4BE8FLYEFyNoOBw==}
     dependencies:
       obliterator: 1.6.1
-    dev: false
 
   /mnemonist@0.39.5:
     resolution: {integrity: sha512-FPUtkhtJ0efmEFGpU14x7jGbTB+s18LrzRL2KgoWz9YvcY3cPomz8tih01GbHwnGk/OmkOKfqd/RAQoc8Lm7DQ==}
@@ -6209,7 +6210,6 @@ packages:
 
   /obliterator@1.6.1:
     resolution: {integrity: sha512-9WXswnqINnnhOG/5SLimUlzuU1hFJUc8zkwyD59Sd+dPOMf05PmnYG/d6Q7HZ+KmgkZJa1PxRso6QdM3sTNHig==}
-    dev: false
 
   /obliterator@2.0.4:
     resolution: {integrity: sha512-lgHwxlxV1qIg1Eap7LgIeoBWIMFibOjbrYPIPJZcI1mmGAI2m3lNYpK12Y+GBdPQ0U1hRwSord7GIaawz962qQ==}

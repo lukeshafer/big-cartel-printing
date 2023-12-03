@@ -3,9 +3,15 @@
   "compilerOptions": {
     "module": "esnext",
     "moduleResolution": "node",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "verbatimModuleSyntax": true,
     "baseUrl": ".",
     "paths": {
-      "@big-cartel-printing/core/*": ["../core/src/*"]
+      "@big-cartel-printing/core/*": [
+        "../core/src/*"
+      ]
     }
   }
 }
