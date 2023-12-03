@@ -29,7 +29,7 @@ async function handleOrderCreated(data) {
   console.log("Printed, sending 'label-printed' message to server")
 
 	await ws.send(JSON.stringify({
-    type: 'labelprinted',
+    action: 'labelprinted',
     data: {
       orderNumber: data.order_id
     }
