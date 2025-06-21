@@ -1,17 +1,15 @@
 import html from 'html-template-tag';
-import { readFileSync } from 'fs';
+import { loadImage } from '../src/template-lib';
 
-/**
- * @param {object} address
- * @param {string} address.name
- * @param {string} address.address1
- * @param {string} address.address2
- * @param {string} address.city
- * @param {string} address.state
- * @param {string} address.zip
- * @param {string} address.country
- */
-export default function labelTemplate(address) {
+export default function labelTemplate(address: {
+  name: string;
+  address1: string,
+  address2: string,
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+}) {
 	return html`
 		<html>
 			<head>
@@ -71,11 +69,4 @@ export default function labelTemplate(address) {
 			</body>
 		</html>
 	`;
-}
-
-/** @param {string} path */
-function loadImage(path, format = 'png') {
-	const file = readFileSync(path);
-	const base64 = file.toString('base64');
-	return `data:image/${format};base64,${base64}`;
 }

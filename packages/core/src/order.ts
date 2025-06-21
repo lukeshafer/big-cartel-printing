@@ -1,30 +1,28 @@
 import { Table } from 'sst/node/table';
 import { OrderSchema } from './big-cartel';
-import { event } from './events';
 import { z } from 'zod';
 import { AttributeValue, DynamoDB } from '@aws-sdk/client-dynamodb';
+import { OrderEvent } from './events';
+import { createEventBuilder } from 'sst/node/event-bus';
 
 const OrdersTableName = Table.Orders.tableName;
 const dynamoDb = new DynamoDB();
 
 export const Order = {
   Events: {
-    Created: event('order.created', {
-      order_id: z.string(),
-      address: z.object({
-        name: z.string(),
-        address1: z.string().optional(),
-        address2: z.string().optional(),
-        city: z.string().optional(),
-        state: z.string().optional(),
-        zip: z.string().optional(),
-        country: z.string().optional(),
-      }),
-    }),
+    Created: createEventBuilder({
+      bus: 'EventsBus',
+    })('order.created', OrderEvent),
   },
   WebhookEvent: {
     Name: 'order.created',
     Schema: OrderSchema,
+  },
+  WebSocketEvent: {
+    'order-created': z.object(OrderEvent),
+    'label-printed': z.object({
+      orderNumber: z.string(),
+    }),
   },
 };
 

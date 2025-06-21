@@ -1,7 +1,8 @@
-import { generatePDF } from './src/generatePDF.mjs';
+import { generatePDF } from './src/generatePDF';
 import { writeFile } from 'fs/promises';
-import { printBuffer } from './src/printBuffer.mjs';
-import labelTemplate from './templates/label.mjs';
+import { printBuffer } from './src/printBuffer';
+import labelTemplate from './templates/label';
+import packingSlipTemplate from './templates/packing-slip';
 import WebSocket from 'ws';
 
 const ws = new WebSocket('wss://750ryrtfm5.execute-api.us-east-2.amazonaws.com/luke');
@@ -16,24 +17,30 @@ ws.on('message', async (rawData) => {
 	switch (body.type) {
 		case 'order-created':
 			return await handleOrderCreated(body.data);
-    default: return;
+		default:
+			return;
 	}
 });
 
-/** @param {any} data */
-async function handleOrderCreated(data) {
-	const content = labelTemplate(data.address);
-	const pdf = await generatePDF(content);
-	await printBuffer(pdf, 'Rollo');
+async function handleOrderCreated(data: any) {
+	const label = labelTemplate(data.address);
+	const label_pdf = await generatePDF(label);
+	await printBuffer(label_pdf, 'Rollo');
 
-  console.log("Printed, sending 'label-printed' message to server")
+	const packing_slip = packingSlipTemplate(data);
+	const packing_slip_pdf = await generatePDF(packing_slip);
+	await printBuffer(packing_slip_pdf, 'Rollo');
 
-	await ws.send(JSON.stringify({
-    action: 'labelprinted',
-    data: {
-      orderNumber: data.order_id
-    }
-  }));
+	console.log("Printed, sending 'label-printed' message to server");
+
+	await ws.send(
+		JSON.stringify({
+			action: 'labelprinted',
+			data: {
+				orderNumber: data.order_id,
+			},
+		})
+	);
 }
 
 ws.on('close', () => {

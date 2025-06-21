@@ -8,7 +8,7 @@ import { writeFile, unlink } from 'fs/promises';
  * If not specified, the printer name will be read from the PRINTER_NAME environment variable.
  * @returns {Promise<void>} - Promise that resolves when the buffer has been sent to the printer.
  */
-export async function printBuffer(buffer, printer = process.env.PRINTER_NAME || 'PDF') {
+export async function printBuffer(buffer: Buffer, printer = process.env.PRINTER_NAME || 'PDF'): Promise<void> {
 	const tmpFilePath = `./${Math.random().toString(36).substr(7)}.pdf`;
 
 	await writeFile(tmpFilePath, buffer, 'binary');
